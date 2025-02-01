@@ -1,12 +1,11 @@
-import { useState, useEffect } from "react";
-import useMovies from '../hooks/useMovies'
+import { useState } from "react";
+import useMovies from "../hooks/useMovies";
 import MovieCards from "../components/MovieCard";
+import { TailSpin } from "react-loader-spinner";
 
 const Home = () => {
-    const [category, setCategory]=useState('popular');
-    const {movies,loading,error}=useMovies(category);
-
-    console.log(movies);
+  const [category, setCategory] = useState("popular");
+  const { movies, loading, error } = useMovies(category);
 
   return (
     <div className="pt-20 flex flex-col min-h-screen bg-gray-200">
@@ -19,13 +18,14 @@ const Home = () => {
           <p className="text-xl text-gray-600 mb-8">
             Tu plataforma favorita para explorar películas y series.
           </p>
-          <div className="flex justify-center space-x-4 mb-8">
+          {/* botnes*/}
+          <div className="flex justify-left space-x-4 mb-8 bg-gray-400">
             <button
               onClick={() => setCategory("popular")}
               className={`px-4 py-2 rounded-md ${
                 category === "popular"
                   ? "bg-gray-500 text-white"
-                  : "bg-gray-200 text-gray-800"
+                  : "bg-gray-400 text-white"
               }`}
             >
               Populares
@@ -34,8 +34,8 @@ const Home = () => {
               onClick={() => setCategory("top_rated")}
               className={`px-4 py-2 rounded-md ${
                 category === "top_rated"
-                  ? "bg-blue-500 text-white"
-                  : "bg-gray-200 text-gray-800"
+                  ? "bg-gray-500 text-white"
+                  : "bg-gray-400 text-white"
               }`}
             >
               Mejor Valoradas
@@ -44,21 +44,25 @@ const Home = () => {
               onClick={() => setCategory("upcoming")}
               className={`px-4 py-2 rounded-md ${
                 category === "upcoming"
-                  ? "bg-blue-500 text-white"
-                  : "bg-gray-200 text-gray-800"
+                  ? "bg-gray-500 text-white"
+                  : "bg-gray-400 text-white"
               }`}
             >
               Próximas
             </button>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {movies.map((movie) => (
-          <MovieCards movie={movie}/>
-        ))}
-      </div>
+
+          {/*CARDS*/}
+    
+            <div className="grid  items-center">
+            {loading ? (
+              <TailSpin />
+            ) : (
+              <MovieCards movies={movies} key={movies.id} />
+            )}
+          </div>
         </section>
       </main>
-
 
       <footer className="bg-gray-800 text-white py-6">
         <div className="container mx-auto px-4 text-center">
