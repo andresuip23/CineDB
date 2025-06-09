@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
+
 const useMovies = (category) => {
   const BaseURL = "https://api.themoviedb.org/3/movie";
-  const APIKEY =
-    "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkNDE0YzNmMjkwNzY4MzY4ZGE2YTkwMzY1OThhZmE4NyIsIm5iZiI6MTczODM1NTQzMi4zNDYsInN1YiI6IjY3OWQzMmU4MTc2ZmRiMjI0NGNiMmEyMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.k-_A5sNXErIQlFNOA1OZCSmqcNHLg7JXtTh8dopCYXo";
+  const apiUrl = import.meta.env.VITE_MOVIE_API_KEY;
 
   const [movies, setMovies] = useState([]); // Estado para almacenar las películas
   const [loading, setLoading] = useState(true); // Estado para manejar el loading
@@ -17,7 +17,7 @@ const useMovies = (category) => {
     },
     headers: {
       accept: "application/json",
-      Authorization: `Bearer ${APIKEY}`,
+      Authorization: `Bearer ${apiUrl}`,
     },
   };
 

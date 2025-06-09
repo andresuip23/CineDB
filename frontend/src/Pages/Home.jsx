@@ -2,6 +2,11 @@ import { useState } from "react";
 import useMovies from "../hooks/useMovies";
 import MovieCards from "../components/MovieCard";
 import { TailSpin } from "react-loader-spinner";
+import SearchBar from "../components/SearchBar";
+import CategorySelector from "../components/CategorySelector";
+import Footer from "../components/Footer";
+import DailyMovie from "../components/DailyMovie";
+import CelebrityCarousel from "../components/CelebrityCard";
 
 const Home = () => {
   const [category, setCategory] = useState("popular");
@@ -18,63 +23,33 @@ const Home = () => {
           <p className="text-xl text-gray-600 mb-8">
             Tu plataforma favorita para explorar películas y series.
           </p>
+          {/*SearchBar*/}
+          <SearchBar />
           {/* botnes*/}
-          <div className="flex justify-left space-x-4 mb-8 bg-gray-400">
-            <button
-              onClick={() => setCategory("popular")}
-              className={`px-4 py-2 rounded-md ${
-                category === "popular"
-                  ? "bg-gray-500 text-white"
-                  : "bg-gray-400 text-white"
-              }`}
-            >
-              Populares
-            </button>
-            <button
-              onClick={() => setCategory("top_rated")}
-              className={`px-4 py-2 rounded-md ${
-                category === "top_rated"
-                  ? "bg-gray-500 text-white"
-                  : "bg-gray-400 text-white"
-              }`}
-            >
-              Mejor Valoradas
-            </button>
-            <button
-              onClick={() => setCategory("upcoming")}
-              className={`px-4 py-2 rounded-md ${
-                category === "upcoming"
-                  ? "bg-gray-500 text-white"
-                  : "bg-gray-400 text-white"
-              }`}
-            >
-              Próximas
-            </button>
-          </div>
-
+          <CategorySelector category={category} setCategory={setCategory} />
           {/*CARDS*/}
-    
-            <div className="grid  items-center">
+          <div className="grid  items-center">
             {loading ? (
-              <TailSpin />
+              <div className="flex justify-center items-center h-full">
+                <TailSpin color="#00BFFF" height={50} width={50} />
+              </div>
             ) : (
-              <MovieCards movies={movies} key={movies.id} />
+              <MovieCards movies={movies} />
             )}
+            {error && (
+              <p className="text-red-500">
+                Hubo un error al cargar las películas.
+              </p>
+            )}
+          </div >
+          <DailyMovie />
+          {/*CeleibryCards*/}
+          <div className="grid  items-center">
+          <CelebrityCarousel />
           </div>
         </section>
       </main>
-
-      <footer className="bg-gray-800 text-white py-6">
-        <div className="container mx-auto px-4 text-center">
-          <p className="text-lg">
-            &copy; {new Date().getFullYear()} CineDB. Todos los derechos
-            reservados.
-          </p>
-          <p className="text-sm text-gray-400 mt-2">
-            Desarrollado con ❤️ por [Tu Nombre]
-          </p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };
