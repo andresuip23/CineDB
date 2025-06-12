@@ -33,7 +33,7 @@ export default function DailyRecommendation() {
   }, []);
 
   return (
-    <div className="max-w-5xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden mb-8 p-4 flex flex-col md:flex-row gap-6">
+    <div className="max-w-5xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden mb-8 p-4 flex flex-col md:flex-row gap-6 mt-8">
     {/* Imagen */}
     <div className="w-full md:w-1/2 h-64 md:h-auto">
       <img

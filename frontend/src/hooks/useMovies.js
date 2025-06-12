@@ -12,7 +12,7 @@ const useMovies = (category) => {
 
   const options = {
     params: {
-      language: "es-US",
+      language: "en-US",
       page: 1,
     },
     headers: {

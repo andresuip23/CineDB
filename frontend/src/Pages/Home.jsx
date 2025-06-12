@@ -7,6 +7,7 @@ import CategorySelector from "../components/CategorySelector";
 import Footer from "../components/Footer";
 import DailyMovie from "../components/DailyMovie";
 import CelebrityCarousel from "../components/CelebrityCard";
+import MovieReviews from "../components/MovieReviews";
 
 const Home = () => {
   const [category, setCategory] = useState("popular");
@@ -47,6 +48,7 @@ const Home = () => {
           <div className="grid  items-center">
           <CelebrityCarousel />
           </div>
+          <MovieReviews/>
         </section>
       </main>
       <Footer />

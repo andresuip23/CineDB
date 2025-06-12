@@ -21,14 +21,22 @@ const MovieCards = ({ movies }) => {
     >
       {movies.map((movie) => (
         <SwiperSlide key={movie.id} className="flex justify-center items-center">
-          <div className="w-[200px] h-[300px] bg-white rounded-lg shadow-lg overflow-hidden">
-            <img
-              src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-              alt={movie.title}
-              className="w-full h-full object-cover"
-            />
+        <div className="group relative w-[200px] h-[300px] rounded-lg overflow-hidden shadow-lg transform transition-transform duration-300 hover:scale-105">
+          <img
+            src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+            alt={movie.title}
+            className="w-full h-full object-cover"
+          />
+          
+          {/* Overlay al hacer hover */}
+          <div className="absolute inset-0 backdrop-blur-sm bg-black/30 flex flex-col justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-center px-2">
+            <h3 className="text-white text-lg font-bold mb-2">{movie.title}</h3>
+            <p className="text-gray-200 text-sm">
+              ⭐ {movie.vote_average?.toFixed(1) ?? "Sin puntuación"}
+            </p>
           </div>
-        </SwiperSlide>
+        </div>
+      </SwiperSlide>
       ))}
     </Swiper>
   );
