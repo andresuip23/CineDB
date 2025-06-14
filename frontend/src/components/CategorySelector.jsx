@@ -6,7 +6,7 @@ const CategorySelector = ({ category, setCategory }) => {
     ];
   
     return (
-      <div className="flex justify-left space-x-4 mb-8 bg-gray-400 p-2 rounded-md">
+      <div className="flex justify-left space-x-4 bg-gray-400 p-2 rounded-md">
         {categories.map(({ key, label }) => (
           <button
             key={key}

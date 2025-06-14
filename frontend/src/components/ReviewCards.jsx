@@ -1,14 +1,23 @@
 import useReviews from "../hooks/useReview";
+import { AiOutlineInfoCircle } from "react-icons/ai";
 
 export default function MovieReviews({ movieId }) {
   const { reviews, loading } = useReviews(movieId);
 
-  if (loading) return <p>Cargando críticas...</p>;
+  if (loading)
+    return <p className="text-center text-gray-600 mt-4">Cargando críticas...</p>;
+
+  if (!reviews || reviews.length === 0)
+    return (
+      <div className="flex items-center gap-2 text-gray-500 italic mt-4">
+        <AiOutlineInfoCircle size={20} />
+        <span>No hay reseñas disponibles para esta película.</span>
+      </div>
+    );
 
   return (
-    <div className="space-y-4 mt-8 max-w-4xl mx-auto">
-      <h2 className="text-2xl font-bold text-gray-800 mb-2">📝 Críticas</h2>
-      {reviews.slice(0, 3).map((review) => (
+    <div className="space-y-4  max-w-4xl mx-auto">
+      {reviews.slice(0, 2).map((review) => (
         <div
           key={review.id}
           className="bg-white p-4 rounded-lg shadow-md border border-gray-200"

@@ -4,3 +4,21 @@ body {
     margin: 0;
     padding: 0;
   }
+
+
+.swiper-button-next,
+.swiper-button-prev {
+  @apply bg-white/30 hover:bg-white/60 text-black rounded-full w-12 h-12 flex items-center justify-center shadow-md transition duration-300;
+
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+}
+
+/* Ajuste del ícono que Swiper agrega con ::after */
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 18px;         /* Tamaño del ícono */
+  font-weight: bold;
+  color: black;            /* Asegura buen contraste */
+}
