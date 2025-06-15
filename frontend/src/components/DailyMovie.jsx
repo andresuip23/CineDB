@@ -29,7 +29,6 @@ export default function DailyRecommendation() {
     };
 
     fetchTrendingMovie();
-    console.log(movie)
   }, []);
 
   return (

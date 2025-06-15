@@ -15,7 +15,7 @@ export default function useReviews(movieId) {
   useEffect(() => {
     async function fetchReviews() {
       try {
-        const res = await fetch(`https://api.themoviedb.org/3/movie/${movieId}/reviews?language=en-US&page=1`,options);
+        const res = await fetch(`https://api.themoviedb.org/3/movie/${movieId}/reviews`,options);
         const data = await res.json();
         setReviews(data.results);
       } catch (error) {
@@ -24,7 +24,6 @@ export default function useReviews(movieId) {
         setLoading(false);
       }
     }
-    console.log(reviews);
     fetchReviews();
   }, [movieId]);
 

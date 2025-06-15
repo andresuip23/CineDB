@@ -2,11 +2,17 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { FaCalendarAlt, FaStar, FaFilm, FaClock } from "react-icons/fa";
 import axios from "axios";
+import useRecommendation from "../hooks/useRecommendation";
+import useTrailer from "../hooks/useTrailer";
+import useProviders from "../hooks/useProviders";
 
 const MovieDetail = () => {
   const { id } = useParams();
   const [movie, setMovie] = useState(null);
   const apiKey = import.meta.env.VITE_MOVIE_API_KEY;
+  const { recommendations } = useRecommendation(id);
+  const { trailer } = useTrailer(id);
+  const { providers } = useProviders(id);
   const options = {
     params: {
       language: "en-US",
@@ -19,9 +25,11 @@ const MovieDetail = () => {
 
   useEffect(() => {
     const fetchMovie = async () => {
-      
       try {
-        const res = await axios.get(`https://api.themoviedb.org/3/movie/${id}`,options);
+        const res = await axios.get(
+          `https://api.themoviedb.org/3/movie/${id}`,
+          options
+        );
         setMovie(res.data);
       } catch (error) {
         console.error("Error al obtener detalles de la película:", error);
@@ -33,7 +41,9 @@ const MovieDetail = () => {
 
   if (!movie) {
     return (
-      <div className="text-center text-gray-600 py-10">Cargando detalles...</div>
+      <div className="text-center text-gray-600 py-10">
+        Cargando detalles...
+      </div>
     );
   }
 
